@@ -42,12 +42,10 @@ public class HttpSiteSource implements SiteSource {
 		return document;
 	}
 
-	@Override
 	public Document getRootPage() throws Exception {
 		return getDocument(baseUrl);
 	}
 
-	@Override
 	public Document getSubPage(String subUrl) throws Exception {
 		return getDocument(getUrl(subUrl));
 	}

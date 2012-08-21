@@ -106,7 +106,6 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 		this.watchOnlineLink = watchOnlineLink;
 	}
 
-	@Override
 	public int compareTo(ReleaseEntry o) {
 		if (this == o) {
 			return 0;
