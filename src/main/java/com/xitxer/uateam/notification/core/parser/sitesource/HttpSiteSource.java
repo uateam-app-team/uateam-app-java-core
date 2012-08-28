@@ -1,4 +1,4 @@
-package com.xitxer.uateam.notification.server.parser.sitesource;
+package com.xitxer.uateam.notification.core.parser.sitesource;
 
 import java.net.SocketTimeoutException;
 import java.net.URL;

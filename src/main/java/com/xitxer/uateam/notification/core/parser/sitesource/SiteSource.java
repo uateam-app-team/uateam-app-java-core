@@ -1,4 +1,4 @@
-package com.xitxer.uateam.notification.server.parser.sitesource;
+package com.xitxer.uateam.notification.core.parser.sitesource;
 
 import org.jsoup.nodes.Document;
 

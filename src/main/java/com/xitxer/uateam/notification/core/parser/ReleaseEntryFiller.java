@@ -1,10 +1,10 @@
-package com.xitxer.uateam.notification.server.parser;
+package com.xitxer.uateam.notification.core.parser;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.xitxer.uateam.notification.server.model.ReleaseEntry;
-import com.xitxer.uateam.notification.server.parser.exceptions.HtmlLayoutChangedException;
+import com.xitxer.uateam.notification.core.model.ReleaseEntry;
+import com.xitxer.uateam.notification.core.parser.exceptions.HtmlLayoutChangedException;
 
 public class ReleaseEntryFiller {
 

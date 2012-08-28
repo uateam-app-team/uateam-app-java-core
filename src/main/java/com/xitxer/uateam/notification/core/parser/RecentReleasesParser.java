@@ -1,4 +1,4 @@
-package com.xitxer.uateam.notification.server.parser;
+package com.xitxer.uateam.notification.core.parser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.xitxer.uateam.notification.server.model.ReleaseEntry;
-import com.xitxer.uateam.notification.server.parser.exceptions.HtmlLayoutChangedException;
-import com.xitxer.uateam.notification.server.parser.exceptions.PageNotAvailableException;
-import com.xitxer.uateam.notification.server.parser.sitesource.SiteSource;
+import com.xitxer.uateam.notification.core.model.ReleaseEntry;
+import com.xitxer.uateam.notification.core.parser.exceptions.HtmlLayoutChangedException;
+import com.xitxer.uateam.notification.core.parser.exceptions.PageNotAvailableException;
+import com.xitxer.uateam.notification.core.parser.sitesource.SiteSource;
 
 public class RecentReleasesParser {
 

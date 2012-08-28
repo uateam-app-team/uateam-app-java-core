@@ -1,4 +1,4 @@
-package com.xitxer.uateam.notification.server.model;
+package com.xitxer.uateam.notification.core.model;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ComparisonChain;
