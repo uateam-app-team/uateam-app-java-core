@@ -17,15 +17,9 @@ import com.xitxer.uateam.notification.core.parser.sitesource.SiteSource;
 public class RecentReleasesParser {
 
 	private static final String QUERY_DIV_FRESHRELEASE = "div.freshrelease";
-	private static final String QUERY_DIV_LINKS = "div.releasebuttons a[href]";
 	private static final String QUERY_DIV_ONLINE_CODE = "div#online_code param[name=flashvars]";
 
-	private static final String ATTR_HREF = "href";
-	private static final String ATTR_SRC = "src";
 	private static final String ATTR_VALUE = "value";
-
-	private static final String SRC_IMG_HD = "/img/hd.jpg";
-	private static final String SRC_IMG_DOWNLOAD = "/img/download.png";
 
 	private static final String REGEXP_WATCH_ONLINE_FILE = ".*file\\=((http|https|ftp)\\://[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,3}/[a-zA-Z0-9\\-\\._/\\\\]+\\.mp4).*";
 
@@ -76,27 +70,6 @@ public class RecentReleasesParser {
 					if (matcher.find()) {
 						releaseEntry.setWatchOnlineLink(matcher.group(1));
 					}
-				}
-			}
-			elements = document.select(QUERY_DIV_LINKS);
-			if (elements.size() > 0) {
-				Element elementDownload = null, elementDownloadHd = null;
-				for (Element element : elements) {
-					String atrrSrcValue = element.attr(ATTR_SRC);
-					if (SRC_IMG_DOWNLOAD.equals(atrrSrcValue)) {
-						elementDownload = element;
-					}
-					if (SRC_IMG_HD.equals(atrrSrcValue)) {
-						elementDownloadHd = element;
-					}
-				}
-				if (elementDownload != null) {
-					releaseEntry
-							.setTorrentLink(elementDownload.attr(ATTR_HREF));
-				}
-				if (elementDownloadHd != null) {
-					releaseEntry.setTorrentHdLink(elementDownloadHd
-							.attr(ATTR_HREF));
 				}
 			}
 		} catch (Exception e) {

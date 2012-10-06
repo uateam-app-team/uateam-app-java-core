@@ -12,8 +12,6 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 
 	private String groupLink;
 	private String detailsLink;
-	private String torrentLink;
-	private String torrentHdLink;
 	private String watchOnlineLink;
 
 	public ReleaseEntry() {
@@ -29,8 +27,6 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 
 		setGroupLink(that.groupLink);
 		setDetailsLink(that.detailsLink);
-		setTorrentLink(that.torrentLink);
-		setTorrentHdLink(that.torrentHdLink);
 		setWatchOnlineLink(that.watchOnlineLink);
 	}
 
@@ -82,22 +78,6 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 		this.detailsLink = detailsLink;
 	}
 
-	public String getTorrentLink() {
-		return torrentLink;
-	}
-
-	public void setTorrentLink(String torrentLink) {
-		this.torrentLink = torrentLink;
-	}
-
-	public String getTorrentHdLink() {
-		return torrentHdLink;
-	}
-
-	public void setTorrentHdLink(String torrentHdLink) {
-		this.torrentHdLink = torrentHdLink;
-	}
-
 	public String getWatchOnlineLink() {
 		return watchOnlineLink;
 	}
@@ -117,8 +97,6 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 				.compare(release, o.release).compare(season, o.season)
 				.compare(episode, o.episode).compare(groupLink, o.groupLink)
 				.compare(detailsLink, o.detailsLink)
-				.compare(torrentLink, o.torrentLink)
-				.compare(torrentHdLink, o.torrentHdLink)
 				.compare(watchOnlineLink, o.watchOnlineLink).result();
 	}
 
@@ -140,15 +118,13 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 				&& Objects.equal(episode, that.episode)
 				&& Objects.equal(groupLink, that.groupLink)
 				&& Objects.equal(detailsLink, that.detailsLink)
-				&& Objects.equal(torrentLink, that.torrentLink)
-				&& Objects.equal(torrentHdLink, that.torrentHdLink)
 				&& Objects.equal(watchOnlineLink, that.watchOnlineLink);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(group, release, season, episode, groupLink,
-				detailsLink, torrentLink, torrentHdLink, watchOnlineLink);
+				detailsLink, watchOnlineLink);
 	}
 
 	@Override
@@ -157,8 +133,6 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 				.add("Realese", release).add("Season", season)
 				.add("Episode", episode).add("Group Link", groupLink)
 				.add("Details Link", detailsLink)
-				.add("Torrent Link", torrentLink)
-				.add("Torrent HD Link", torrentHdLink)
 				.add("Watch online Link", watchOnlineLink).toString();
 	}
 }
