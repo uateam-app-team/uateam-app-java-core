@@ -5,16 +5,17 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.xitxer.uateam.notification.core.model.ReleaseEntry;
-import com.xitxer.uateam.notification.core.parser.exceptions.HtmlLayoutChangedException;
 import com.xitxer.uateam.notification.core.parser.exceptions.PageNotAvailableException;
 import com.xitxer.uateam.notification.core.parser.sitesource.SiteSource;
 
-public class RecentReleasesParser {
+public class RecentReleasesParser extends BaseParser {
 
 	private static final String QUERY_DIV_FRESHRELEASE = "div.freshrelease";
 	private static final String QUERY_DIV_ONLINE_CODE = "div#online_code param[name=flashvars]";
@@ -23,23 +24,8 @@ public class RecentReleasesParser {
 
 	private static final String REGEXP_WATCH_ONLINE_FILE = ".*file\\=((http|https|ftp)\\://[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,3}/[a-zA-Z0-9\\-\\._/\\\\]+\\.mp4).*";
 
-	private SiteSource siteSource;
-
-	public RecentReleasesParser(SiteSource siteSource) {
-		this.siteSource = siteSource;
-	}
-
-	private Elements check(Elements elements) throws HtmlLayoutChangedException {
-		if (elements.isEmpty()) {
-			throw new HtmlLayoutChangedException(
-					"Could not select with css query - "
-							+ QUERY_DIV_FRESHRELEASE);
-		}
-		return elements;
-	}
-
-	private Elements getContentElements() throws Exception {
-		return check(siteSource.getRootPage().select(QUERY_DIV_FRESHRELEASE));
+	public RecentReleasesParser(@Nonnull final SiteSource siteSource) {
+		super(siteSource);
 	}
 
 	public List<ReleaseEntry> get() throws Exception {
@@ -55,13 +41,10 @@ public class RecentReleasesParser {
 		return episodeEntries;
 	}
 
-	public void parseReleaseLinks(ReleaseEntry releaseEntry)
-			throws PageNotAvailableException {
+	public void parseReleaseLinks(final ReleaseEntry releaseEntry) throws PageNotAvailableException {
 		try {
-			Document document = siteSource.getSubPage(releaseEntry
-					.getDetailsLink());
-			Elements elements;
-			elements = document.select(QUERY_DIV_ONLINE_CODE);
+			Document document = getSubPage(releaseEntry.getDetailsLink());
+			Elements elements = document.select(QUERY_DIV_ONLINE_CODE);
 			if (elements.size() > 0) {
 				String stringWithFilePath = elements.first().attr(ATTR_VALUE);
 				if (stringWithFilePath != null) {
@@ -73,11 +56,11 @@ public class RecentReleasesParser {
 				}
 			}
 		} catch (Exception e) {
-			PageNotAvailableException exception = new PageNotAvailableException(
-					"Sub page not found or bad: "
-							+ releaseEntry.getDetailsLink());
-			exception.setStackTrace(e.getStackTrace());
-			throw exception;
+			throw new PageNotAvailableException("Sub page not found or bad: " + releaseEntry.getDetailsLink(), e);
 		}
+	}
+
+	private Elements getContentElements() throws Exception {
+		return check(getRootPage().select(QUERY_DIV_FRESHRELEASE), "Could not select with css query - " + QUERY_DIV_FRESHRELEASE);
 	}
 }
