@@ -12,22 +12,12 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 
 	private String groupLink;
 	private String detailsLink;
+
 	private String watchOnlineLink;
+	private String iconLink;
 
 	public ReleaseEntry() {
 		super();
-	}
-
-	public ReleaseEntry(ReleaseEntry that) {
-		super();
-		setGroup(that.group);
-		setRelease(that.release);
-		setSeason(that.season);
-		setEpisode(that.episode);
-
-		setGroupLink(that.groupLink);
-		setDetailsLink(that.detailsLink);
-		setWatchOnlineLink(that.watchOnlineLink);
 	}
 
 	public String getGroup() {
@@ -86,6 +76,14 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 		this.watchOnlineLink = watchOnlineLink;
 	}
 
+	public String getIconLink() {
+		return iconLink;
+	}
+
+	public void setIconLink(String iconLink) {
+		this.iconLink = iconLink;
+	}
+
 	public int compareTo(ReleaseEntry o) {
 		if (this == o) {
 			return 0;
@@ -93,11 +91,9 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 		if (o == null) {
 			return 1;
 		}
-		return ComparisonChain.start().compare(group, o.group)
-				.compare(release, o.release).compare(season, o.season)
-				.compare(episode, o.episode).compare(groupLink, o.groupLink)
-				.compare(detailsLink, o.detailsLink)
-				.compare(watchOnlineLink, o.watchOnlineLink).result();
+		return ComparisonChain.start().compare(group, o.group).compare(release, o.release).compare(season, o.season)
+				.compare(episode, o.episode).compare(groupLink, o.groupLink).compare(detailsLink, o.detailsLink)
+				.result();
 	}
 
 	@Override
@@ -112,27 +108,20 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 			return false;
 		}
 		ReleaseEntry that = (ReleaseEntry) obj;
-		return Objects.equal(group, that.group)
-				&& Objects.equal(season, that.season)
-				&& Objects.equal(release, that.release)
-				&& Objects.equal(episode, that.episode)
-				&& Objects.equal(groupLink, that.groupLink)
-				&& Objects.equal(detailsLink, that.detailsLink)
-				&& Objects.equal(watchOnlineLink, that.watchOnlineLink);
+		return Objects.equal(group, that.group) && Objects.equal(season, that.season)
+				&& Objects.equal(release, that.release) && Objects.equal(episode, that.episode)
+				&& Objects.equal(groupLink, that.groupLink) && Objects.equal(detailsLink, that.detailsLink);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(group, release, season, episode, groupLink,
-				detailsLink, watchOnlineLink);
+		return Objects.hashCode(group, release, season, episode, groupLink, detailsLink);
 	}
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).add("Group", group)
-				.add("Realese", release).add("Season", season)
-				.add("Episode", episode).add("Group Link", groupLink)
-				.add("Details Link", detailsLink)
-				.add("Watch online Link", watchOnlineLink).toString();
+		return "ReleaseEntry [group=" + group + ", release=" + release + ", season=" + season + ", episode=" + episode
+				+ ", groupLink=" + groupLink + ", detailsLink=" + detailsLink + ", watchOnlineLink=" + watchOnlineLink
+				+ ", iconLink=" + iconLink + "]";
 	}
 }

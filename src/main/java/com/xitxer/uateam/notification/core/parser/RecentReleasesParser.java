@@ -31,9 +31,7 @@ public class RecentReleasesParser {
 
 	private Elements check(Elements elements) throws HtmlLayoutChangedException {
 		if (elements.isEmpty()) {
-			throw new HtmlLayoutChangedException(
-					"Could not select with css query - "
-							+ QUERY_DIV_FRESHRELEASE);
+			throw new HtmlLayoutChangedException("Could not select with css query - " + QUERY_DIV_FRESHRELEASE);
 		}
 		return elements;
 	}
@@ -43,7 +41,7 @@ public class RecentReleasesParser {
 	}
 
 	public List<ReleaseEntry> get() throws Exception {
-		ReleaseEntryFiller filler = new ReleaseEntryFiller();
+		RecentReleaseEntryFiller filler = new RecentReleaseEntryFiller();
 		List<ReleaseEntry> episodeEntries = new ArrayList<ReleaseEntry>();
 		ReleaseEntry releaseEntry;
 		for (Element element : getContentElements()) {
@@ -55,11 +53,9 @@ public class RecentReleasesParser {
 		return episodeEntries;
 	}
 
-	public void parseReleaseLinks(ReleaseEntry releaseEntry)
-			throws PageNotAvailableException {
+	public ReleaseEntry parseReleaseLinks(ReleaseEntry releaseEntry) throws PageNotAvailableException {
 		try {
-			Document document = siteSource.getSubPage(releaseEntry
-					.getDetailsLink());
+			Document document = siteSource.getSubPage(releaseEntry.getDetailsLink());
 			Elements elements;
 			elements = document.select(QUERY_DIV_ONLINE_CODE);
 			if (elements.size() > 0) {
@@ -72,12 +68,23 @@ public class RecentReleasesParser {
 					}
 				}
 			}
+			return releaseEntry;
 		} catch (Exception e) {
-			PageNotAvailableException exception = new PageNotAvailableException(
-					"Sub page not found or bad: "
-							+ releaseEntry.getDetailsLink());
+			PageNotAvailableException exception = new PageNotAvailableException("Sub page not found or bad: "
+					+ releaseEntry.getDetailsLink());
 			exception.setStackTrace(e.getStackTrace());
 			throw exception;
 		}
+	}
+
+	public List<ReleaseEntry> parseReleasesLinks(List<ReleaseEntry> releaseEntries) {
+		for (ReleaseEntry entry : releaseEntries) {
+			try {
+				parseReleaseLinks(entry);
+			} catch (Exception exception) {
+				exception.printStackTrace();
+			}
+		}
+		return releaseEntries;
 	}
 }

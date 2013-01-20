@@ -1,4 +1,4 @@
-package com.xitxer.uateam.notification.core.utils;
+package com.xitxer.uateam.notification.core.util;
 
 public class UateamSiteUtils {
 	private UateamSiteUtils() {

@@ -7,9 +7,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class HttpSiteSource implements SiteSource {
-	protected static final String USER_AGENT = "Mozilla/5.0 (Windows NT 5.1) "
-			+ "AppleWebKit/535.19 (KHTML, like Gecko) "
-			+ "Chrome/18.0.1025.168 Safari/535.19";
+	protected static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11";
 	protected static final int TIMEOUT = 60000;
 
 	protected String baseUrl;
@@ -29,7 +27,6 @@ public class HttpSiteSource implements SiteSource {
 			try {
 				document = Jsoup.parse(new URL(url).openStream(), "utf-8", url);
 			} catch (SocketTimeoutException e) {
-				e.printStackTrace();
 				if (System.currentTimeMillis() - startTime > TIMEOUT) {
 					e.fillInStackTrace();
 					throw e;
