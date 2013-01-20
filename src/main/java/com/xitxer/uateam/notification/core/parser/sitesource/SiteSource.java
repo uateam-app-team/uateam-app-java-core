@@ -5,5 +5,5 @@ import org.jsoup.nodes.Document;
 public interface SiteSource {
 	Document getRootPage() throws Exception;
 
-	Document getSubPage(String subpath) throws Exception;
+	Document getSubPage(String subUrl) throws Exception;
 }
