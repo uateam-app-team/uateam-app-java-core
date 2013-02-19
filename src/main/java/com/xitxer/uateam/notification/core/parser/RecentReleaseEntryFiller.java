@@ -13,16 +13,13 @@ public class RecentReleaseEntryFiller {
 	private static final String TAG_P = "P";
 	private static final String TAG_SPAN = "span";
 
-	private static final String ATTR_HREF = "href";
-	private static final String ATTR_SRC = "src";
-
 	private static final String REGEXP_REALEASE_NUMBERS = "\\.";
 
 	private static final String QUERY_RELEASE_ICON = "img[src].category_icon";
 
 	private ReleaseEntry episodeEntry = new ReleaseEntry();
 
-	public boolean parse(Element rootElement) throws HtmlLayoutChangedException {
+	public boolean parse(final Element rootElement) throws HtmlLayoutChangedException {
 		try {
 			Elements elements = rootElement.children();
 
@@ -44,10 +41,10 @@ public class RecentReleaseEntryFiller {
 			episodeEntry.setRelease(titleElements.get(1).text());
 
 			Elements linkElements = elements.select(TAG_A);
-			episodeEntry.setGroupLink(linkElements.get(0).attr(ATTR_HREF));
-			episodeEntry.setDetailsLink(linkElements.get(1).attr(ATTR_HREF));
+			episodeEntry.setGroupLink(linkElements.get(0).attr(BaseParser.ATTR_HREF));
+			episodeEntry.setDetailsLink(linkElements.get(1).attr(BaseParser.ATTR_HREF));
 
-			episodeEntry.setIconLink(elements.select(QUERY_RELEASE_ICON).get(0).attr(ATTR_SRC));
+			episodeEntry.setIconLink(elements.select(QUERY_RELEASE_ICON).get(0).attr(BaseParser.ATTR_SRC));
 
 			return true;
 		} catch (Exception e) {

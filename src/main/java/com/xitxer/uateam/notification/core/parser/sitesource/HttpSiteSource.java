@@ -10,8 +10,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 public class HttpSiteSource implements SiteSource {
-	protected static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11";
-	protected static final int TIMEOUT = 60000;
+	private static final int TIMEOUT = 60000;
 
 	protected String baseUrl;
 
@@ -32,9 +31,6 @@ public class HttpSiteSource implements SiteSource {
 					e.fillInStackTrace();
 					throw e;
 				}
-			} catch (Exception e) {
-				e.fillInStackTrace();
-				throw e;
 			}
 		}
 		return document;

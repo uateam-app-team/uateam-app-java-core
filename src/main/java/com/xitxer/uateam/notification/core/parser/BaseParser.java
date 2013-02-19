@@ -1,6 +1,5 @@
 package com.xitxer.uateam.notification.core.parser;
 
-
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
@@ -9,6 +8,11 @@ import com.xitxer.uateam.notification.core.parser.exceptions.HtmlLayoutChangedEx
 import com.xitxer.uateam.notification.core.parser.sitesource.SiteSource;
 
 public class BaseParser {
+	public static final String TAG_A = "a";
+
+	public static final String ATTR_HREF = "href";
+	public static final String ATTR_SRC = "src";
+
 	private final SiteSource siteSource;
 
 	public BaseParser(final SiteSource siteSource) {
@@ -25,6 +29,10 @@ public class BaseParser {
 
 	protected Document getRootPage() throws Exception {
 		return siteSource.getRootPage();
+	}
+
+	protected SiteSource getSiteSource(){
+		return siteSource;
 	}
 
 	protected Document getSubPage(final String subUrl) throws Exception {

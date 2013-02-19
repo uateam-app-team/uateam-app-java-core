@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.xitxer.uateam.notification.core.model.ReleaseEntry;
 import com.xitxer.uateam.notification.core.parser.exceptions.PageNotAvailableException;
+import com.xitxer.uateam.notification.core.parser.exceptions.message.ParseMessages;
 import com.xitxer.uateam.notification.core.parser.sitesource.SiteSource;
 
 public class RecentReleasesParser extends BaseParser {
@@ -30,7 +30,8 @@ public class RecentReleasesParser extends BaseParser {
 		RecentReleaseEntryFiller filler = new RecentReleaseEntryFiller();
 		List<ReleaseEntry> episodeEntries = new ArrayList<ReleaseEntry>();
 		ReleaseEntry releaseEntry;
-		for (Element element : getContentElements()) {
+		for (Element element : check(getRootPage().select(QUERY_DIV_FRESHRELEASE), ParseMessages.COULD_NOT_SELECT_WITH_CSS_QUERY
+				+ QUERY_DIV_FRESHRELEASE)) {
 			if (filler.parse(element)) {
 				releaseEntry = filler.refresh();
 				episodeEntries.add(releaseEntry);
@@ -39,10 +40,9 @@ public class RecentReleasesParser extends BaseParser {
 		return episodeEntries;
 	}
 
-	public ReleaseEntry parseReleaseLinks(ReleaseEntry releaseEntry) throws PageNotAvailableException {
+	public ReleaseEntry parseReleaseLinks(final ReleaseEntry releaseEntry) throws PageNotAvailableException {
 		try {
-			Document document = getSubPage(releaseEntry.getDetailsLink());
-			Elements elements = document.select(QUERY_DIV_ONLINE_CODE);
+			Elements elements = getSubPage(releaseEntry.getDetailsLink()).select(QUERY_DIV_ONLINE_CODE);
 			if (elements.size() > 0) {
 				String stringWithFilePath = elements.first().attr(ATTR_VALUE);
 				if (stringWithFilePath != null) {
@@ -59,17 +59,12 @@ public class RecentReleasesParser extends BaseParser {
 		}
 	}
 
-	private Elements getContentElements() throws Exception {
-		return check(getRootPage().select(QUERY_DIV_FRESHRELEASE), "Could not select with css query - " + QUERY_DIV_FRESHRELEASE);
-	}
-
-
-	public List<ReleaseEntry> parseReleasesLinks(List<ReleaseEntry> releaseEntries) {
+	public List<ReleaseEntry> parseReleasesLinks(final List<ReleaseEntry> releaseEntries) {
 		for (ReleaseEntry entry : releaseEntries) {
 			try {
 				parseReleaseLinks(entry);
 			} catch (Exception exception) {
-				exception.printStackTrace();
+				// we eat this Exception, due to we want to bring data to user
 			}
 		}
 		return releaseEntries;

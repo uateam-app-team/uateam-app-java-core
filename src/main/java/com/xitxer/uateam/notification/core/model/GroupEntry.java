@@ -5,7 +5,6 @@ import com.google.common.base.Objects;
 public class GroupEntry {
 	private String name;
 	private String link;
-	private String description;
 
 	public GroupEntry() {
 		super();
@@ -20,11 +19,7 @@ public class GroupEntry {
 			return false;
 		}
 		GroupEntry that = (GroupEntry) obj;
-		return Objects.equal(name, that.name) && Objects.equal(link, that.link) && Objects.equal(description, that.description);
-	}
-
-	public String getDescription() {
-		return description;
+		return Objects.equal(name, that.name) && Objects.equal(link, that.link);
 	}
 
 	public String getLink() {
@@ -37,11 +32,7 @@ public class GroupEntry {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(name,link,description);
-	}
-
-	public void setDescription(final String description) {
-		this.description = description;
+		return Objects.hashCode(name, link);
 	}
 
 	public void setLink(final String link) {
@@ -52,5 +43,8 @@ public class GroupEntry {
 		this.name = name;
 	}
 
-
+	@Override
+	public String toString() {
+		return "GroupEntry [name=" + name + ", link=" + link + "]";
+	}
 }
