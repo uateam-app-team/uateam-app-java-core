@@ -15,12 +15,12 @@ public class BaseParser {
 
 	private final SiteSource siteSource;
 
-	public BaseParser(final SiteSource siteSource) {
+	public BaseParser(SiteSource siteSource) {
 		super();
 		this.siteSource = Preconditions.checkNotNull(siteSource);
 	}
 
-	protected Elements check(final Elements elements, final String errorMessage) throws HtmlLayoutChangedException {
+	protected Elements check(Elements elements, String errorMessage) throws HtmlLayoutChangedException {
 		if (elements.isEmpty()) {
 			throw new HtmlLayoutChangedException(errorMessage);
 		}

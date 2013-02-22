@@ -12,7 +12,7 @@ import com.xitxer.uateam.notification.core.parser.sitesource.SiteSource;
 public class SeriesGroupsParser extends BaseParser {
 	private static final String CSS_SELECT_QUERY = "div.module:first-child a.mainlevel";
 
-	public SeriesGroupsParser(final SiteSource siteSource) {
+	public SeriesGroupsParser(SiteSource siteSource) {
 		super(siteSource);
 	}
 

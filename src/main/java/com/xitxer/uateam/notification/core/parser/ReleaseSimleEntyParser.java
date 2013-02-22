@@ -25,18 +25,18 @@ public class ReleaseSimleEntyParser extends BaseParser {
 	private boolean parsed = false;
 	private boolean wasResults = false;
 
-	public ReleaseSimleEntyParser(final SiteSource siteSource, final String url) {
+	public ReleaseSimleEntyParser(SiteSource siteSource, String url) {
 		this(siteSource, url, START_FROM_DEFAULT);
 	}
 
-	private ReleaseSimleEntyParser(final SiteSource siteSource, final String url, final int startFrom) {
+	private ReleaseSimleEntyParser(SiteSource siteSource, String url, int startFrom) {
 		super(siteSource);
 		this.url = url;
 		this.startFrom = startFrom;
 	}
 
 	@Override
-	protected Elements check(final Elements elements, final String errorMessage) throws HtmlLayoutChangedException {
+	protected Elements check(Elements elements, String errorMessage) throws HtmlLayoutChangedException {
 		if(startFrom == START_FROM_DEFAULT){
 			return super.check(elements, errorMessage);
 		}else{
@@ -45,7 +45,7 @@ public class ReleaseSimleEntyParser extends BaseParser {
 	}
 
 	@Override
-	protected Document getSubPage(final String subUrl) throws Exception {
+	protected Document getSubPage(String subUrl) throws Exception {
 		return super.getSubPage(subUrl + HTTP_PARAM_START + startFrom);
 	}
 

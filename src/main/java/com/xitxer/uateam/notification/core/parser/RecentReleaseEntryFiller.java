@@ -19,7 +19,7 @@ public class RecentReleaseEntryFiller {
 
 	private ReleaseEntry episodeEntry = new ReleaseEntry();
 
-	public boolean parse(final Element rootElement) throws HtmlLayoutChangedException {
+	public boolean parse(Element rootElement) throws HtmlLayoutChangedException {
 		try {
 			Elements elements = rootElement.children();
 

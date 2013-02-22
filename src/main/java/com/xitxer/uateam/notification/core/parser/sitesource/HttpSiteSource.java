@@ -14,12 +14,12 @@ public class HttpSiteSource implements SiteSource {
 
 	protected String baseUrl;
 
-	public HttpSiteSource(final String url) {
+	public HttpSiteSource(String url) {
 		super();
 		baseUrl = Preconditions.checkNotNull(url);
 	}
 
-	protected Document getDocument(final String subUrl) throws Exception {
+	protected Document getDocument(String subUrl) throws Exception {
 		String fullUrl = getUrl(subUrl);
 		Document document = null;
 		long startTime = System.currentTimeMillis();
@@ -36,7 +36,7 @@ public class HttpSiteSource implements SiteSource {
 		return document;
 	}
 
-	protected String getUrl(final String subUrl) {
+	protected String getUrl(String subUrl) {
 		return baseUrl + Strings.nullToEmpty(subUrl);
 	}
 
@@ -44,7 +44,7 @@ public class HttpSiteSource implements SiteSource {
 		return getDocument(null);
 	}
 
-	public Document getSubPage(final String subUrl) throws Exception {
+	public Document getSubPage(String subUrl) throws Exception {
 		return getDocument(subUrl);
 	}
 }

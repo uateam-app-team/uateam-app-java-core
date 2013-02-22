@@ -22,7 +22,7 @@ public class RecentReleasesParser extends BaseParser {
 
 	private static final String REGEXP_WATCH_ONLINE_FILE = ".*file\\=((http|https|ftp)\\://[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,3}/[a-zA-Z0-9\\-\\._/\\\\]+\\.mp4).*";
 
-	public RecentReleasesParser(final SiteSource siteSource) {
+	public RecentReleasesParser(SiteSource siteSource) {
 		super(siteSource);
 	}
 
@@ -40,7 +40,7 @@ public class RecentReleasesParser extends BaseParser {
 		return episodeEntries;
 	}
 
-	public ReleaseEntry parseReleaseLinks(final ReleaseEntry releaseEntry) throws PageNotAvailableException {
+	public ReleaseEntry parseReleaseLinks(ReleaseEntry releaseEntry) throws PageNotAvailableException {
 		try {
 			Elements elements = getSubPage(releaseEntry.getDetailsLink()).select(QUERY_DIV_ONLINE_CODE);
 			if (elements.size() > 0) {
@@ -59,7 +59,7 @@ public class RecentReleasesParser extends BaseParser {
 		}
 	}
 
-	public List<ReleaseEntry> parseReleasesLinks(final List<ReleaseEntry> releaseEntries) {
+	public List<ReleaseEntry> parseReleasesLinks(List<ReleaseEntry> releaseEntries) {
 		for (ReleaseEntry entry : releaseEntries) {
 			try {
 				parseReleaseLinks(entry);

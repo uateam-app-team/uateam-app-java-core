@@ -11,7 +11,7 @@ public class GroupEntry {
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -35,11 +35,11 @@ public class GroupEntry {
 		return Objects.hashCode(name, link);
 	}
 
-	public void setLink(final String link) {
+	public void setLink(String link) {
 		this.link = link;
 	}
 
-	public void setName(final String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

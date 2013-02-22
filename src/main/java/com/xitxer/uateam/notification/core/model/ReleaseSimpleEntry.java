@@ -12,11 +12,11 @@ public class ReleaseSimpleEntry {
 		return url;
 	}
 
-	public void setName(final String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setUrl(final String url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
 
