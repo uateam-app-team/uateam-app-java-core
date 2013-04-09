@@ -34,7 +34,7 @@ public class RecentReleaseEntryFiller {
 				}
 			}
 
-			elements = elements.select(TAG_P).get(0).children();
+			elements = elements.select(TAG_P).first().children();
 
 			Elements titleElements = elements.select(TAG_SPAN);
 			episodeEntry.setGroup(titleElements.get(0).text());
@@ -44,7 +44,7 @@ public class RecentReleaseEntryFiller {
 			episodeEntry.setGroupLink(linkElements.get(0).attr(BaseParser.ATTR_HREF));
 			episodeEntry.setDetailsLink(linkElements.get(1).attr(BaseParser.ATTR_HREF));
 
-			episodeEntry.setIconLink(elements.select(QUERY_RELEASE_ICON).get(0).attr(BaseParser.ATTR_SRC));
+			episodeEntry.setIconLink(elements.select(QUERY_RELEASE_ICON).first().attr(BaseParser.ATTR_SRC_ABS));
 
 			return true;
 		} catch (Exception e) {

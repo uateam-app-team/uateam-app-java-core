@@ -12,6 +12,7 @@ public class BaseParser {
 
 	public static final String ATTR_HREF = "href";
 	public static final String ATTR_SRC = "src";
+	public static final String ATTR_SRC_ABS = "abs:src";
 
 	private final SiteSource siteSource;
 

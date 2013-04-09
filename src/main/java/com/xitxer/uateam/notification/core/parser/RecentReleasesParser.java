@@ -59,7 +59,7 @@ public class RecentReleasesParser extends BaseParser {
 		}
 	}
 
-	public List<ReleaseEntry> parseReleasesLinks(List<ReleaseEntry> releaseEntries) {
+	public List<ReleaseEntry> parseReleaseLinks(List<ReleaseEntry> releaseEntries) {
 		for (ReleaseEntry entry : releaseEntries) {
 			try {
 				parseReleaseLinks(entry);
